@@ -1,0 +1,122 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class CardGame{
+  
+  //private ArrayList<Card> playerHand;
+  
+  //ArrayList<Card> hand = new ArrayList<Card>();
+
+  
+  public static ArrayList<Card> dealIn(ArrayList<Card> hand){
+    
+    Card a = new Card();
+    Card b = new Card();
+    
+    hand.add( a);
+    
+    if(!b.equals(a))
+      hand.add(b);
+    
+    return hand;
+  }
+  
+//  public ArrayList<Card> dealInDealer(){
+//    Card d = new Card();
+//    Card e = new Card();
+//    
+//    if(!playerHand.contains(d)){
+//      dealerHand.add(d);
+//    }
+//    if((!playerHand.contains(e)) && (!dealerHand.contains(e))){
+//      dealerHand.add(e);
+//    }
+//    return dealerHand;
+//  }
+  
+  
+//    public static int calcScore(ArrayList<Card> hand){
+//    int sum = 0;
+//    for (Card c : hand){
+//        sum += c.getCardValue().getNumeric();
+//      }    
+//    return sum;
+//  }
+    
+  
+  public static int calcScore(ArrayList<Card> hand){
+    Scanner aceHandler = new Scanner(System.in);
+    int sum = 0;
+    boolean countedAce = false;
+    
+    for (Card c : hand){
+      if (!c.getCardValue().getFace().equals("A")){
+      sum += c.getCardValue().getNumeric();
+      }
+      else{
+        if (sum >= 11){
+          sum += 1;
+        }
+        
+        else {
+          System.out.println("Do you want 1 or 10 for ace? \n Enter '1' or '11'");
+          String answer = aceHandler.nextLine();
+          
+          if(answer.equals("1")){
+            sum+=1;
+            countedAce = true;
+          }
+          else if (answer.equals("11")){
+            sum+=11;
+            countedAce = true;
+          }
+        }
+        
+      }
+    }
+    return sum;
+  }
+  
+  public static void hit(ArrayList<Card> hand){
+    Card c = new Card();
+    if (!hand.contains(c)){
+      hand.add(c);
+    }
+  }
+  
+  public static boolean isBusted(ArrayList<Card> hand){
+    if(calcScore(hand) > 21)
+      return true;
+    else{
+      return false;
+    }
+  }
+  
+  public static void main(String[] args){
+    Scanner in = new Scanner(System.in);
+    System.out.println("Welcome to Blackjack!");
+    ArrayList<Card> hand = new ArrayList<Card>();
+    dealIn(hand);
+    System.out.println(hand);
+    
+    while (!isBusted(hand)){
+    System.out.println("Your score is " + calcScore(hand) + ". Hit or stay?");
+    String hOrS = in.nextLine();
+    
+    if (hOrS.equalsIgnoreCase("hit")){
+      hit(hand);
+      System.out.println(hand);
+    
+    }
+    if (hOrS.equalsIgnoreCase("stay")){
+      
+      break;
+    
+    }
+    }
+    
+    
+    
+  }
+
+}

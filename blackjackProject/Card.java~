@@ -1,0 +1,32 @@
+import java.util.*;
+
+public class Card{
+
+  private int value;
+  private Suit suit;
+  
+  public Card(){
+    
+  }
+  
+ 
+  
+  public void determineSuit(){
+    if ( (int) (Math.random() * 4) == 1){
+      this.suit = Suit.CLUBS;
+    }
+    else if ((int) (Math.random() * 4) == 2){
+      this.suit = Suit.DIAMONDS;
+  } 
+    else if ((int)(Math.random() * 4) == 3){
+      this.suit = Suit.HEARTS;
+    }
+    else{
+      this.suit = Suit.SPADES;
+    }
+  }
+  
+  
+  
+  
+}
