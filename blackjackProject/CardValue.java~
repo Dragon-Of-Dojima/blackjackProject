@@ -1,7 +1,7 @@
 public class CardValue{
 
-  private String face;
-  private int numeric;
+  /*private*/ String face;
+  /*private*/ int numeric;
   
   public CardValue(String faceVal){
     face = faceVal;
@@ -19,6 +19,14 @@ public class CardValue{
         else{
       return Integer.parseInt(f);
     }
+  }
+  
+  public String getFace(){
+    return face;
+  }
+  
+  public int getNumeric(){
+    return numeric;
   }
   
   public static void main(String[] args){

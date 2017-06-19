@@ -13,65 +13,48 @@ public class CardGame{
     Card a = new Card();
     Card b = new Card();
     
-    hand.add( a);
+    hand.add(a);
     
-    if(!b.equals(a))
+    while(hand.size() < 2){
+    if(!b.equals(a)){
       hand.add(b);
-    
+    }
+    else dealIn(hand);
+    }
     return hand;
-  }
+  }    
+    
   
-//  public ArrayList<Card> dealInDealer(){
+  
+//  public static ArrayList<Card> dealInDealer(ArrayList<Card> hand){
+//    Card c = new Card();
 //    Card d = new Card();
-//    Card e = new Card();
 //    
-//    if(!playerHand.contains(d)){
-//      dealerHand.add(d);
-//    }
-//    if((!playerHand.contains(e)) && (!dealerHand.contains(e))){
-//      dealerHand.add(e);
-//    }
-//    return dealerHand;
+//    if
 //  }
   
-  
-//    public static int calcScore(ArrayList<Card> hand){
-//    int sum = 0;
-//    for (Card c : hand){
-//        sum += c.getCardValue().getNumeric();
-//      }    
-//    return sum;
-//  }
     
   
   public static int calcScore(ArrayList<Card> hand){
-    Scanner aceHandler = new Scanner(System.in);
+    
     int sum = 0;
-    boolean countedAce = false;
+    int aces = 0;
     
     for (Card c : hand){
-      if (!c.getCardValue().getFace().equals("A")){
-      sum += c.getCardValue().getNumeric();
+      if (c.getCardValue().getFace().equals("A")){
+        aces++;
       }
       else{
-        if (sum >= 11){
-          sum += 1;
-        }
-        
-        else {
-          System.out.println("Do you want 1 or 10 for ace? \n Enter '1' or '11'");
-          String answer = aceHandler.nextLine();
-          
-          if(answer.equals("1")){
-            sum+=1;
-            countedAce = true;
-          }
-          else if (answer.equals("11")){
-            sum+=11;
-            countedAce = true;
-          }
-        }
-        
+       sum += c.getCardValue().getNumeric();
+      }
+  }
+    while (aces > 0){
+      aces--;
+      if(sum <= 10){
+        sum+=11;
+      }
+      else{
+        sum+=1;
       }
     }
     return sum;
@@ -92,27 +75,53 @@ public class CardGame{
     }
   }
   
+//  public static void printDealerHand(ArrayList<Card> hand){
+//    for (int i = 1; i < hand.size(); i++){
+//      System.out.print(hand.get(i));
+//    }
+//  }
+  
   public static void main(String[] args){
     Scanner in = new Scanner(System.in);
-    System.out.println("Welcome to Blackjack!");
-    ArrayList<Card> hand = new ArrayList<Card>();
-    dealIn(hand);
-    System.out.println(hand);
+    System.out.println("Welcome to Blackjack!\n");
+    ArrayList<Card> playerhand = new ArrayList<Card>();
+    ArrayList<Card> dealerhand = new ArrayList<Card>();
+    dealIn(playerhand);
     
-    while (!isBusted(hand)){
-    System.out.println("Your score is " + calcScore(hand) + ". Hit or stay?");
-    String hOrS = in.nextLine();
-    
-    if (hOrS.equalsIgnoreCase("hit")){
-      hit(hand);
-      System.out.println(hand);
-    
+    for (int i = 0; i < 2; i++){
+      Card a = new Card();
+      if((!playerhand.contains(a)) &&(!dealerhand.contains(a))){
+        dealerhand.add(a);
+      }
     }
-    if (hOrS.equalsIgnoreCase("stay")){
+    
+   
+    //System.out.println("DEALER HAND: [hidden]" + " and " + dealerhand.get(1));
+    System.out.println("TEST DEALER HAND: " + dealerhand);
+    System.out.println("Your hand: " + playerhand);
+    
+    
+    while (!isBusted(playerhand)){
+      System.out.println("Your score is " + calcScore(playerhand) + ". Hit or stay?");
+      String hOrS = in.nextLine();
       
-      break;
-    
-    }
+      
+      if (hOrS.equalsIgnoreCase("hit")){
+        
+        hit(playerhand);
+        System.out.println(playerhand);
+        if(isBusted(playerhand)){
+          System.out.println("Your score is " + calcScore(playerhand) + "! YOU LOSE");
+          break;
+        }
+        //System.out.println(playerhand);
+        
+      }
+      if (hOrS.equalsIgnoreCase("stay")){
+        
+        break;
+        
+      }
     }
     
     

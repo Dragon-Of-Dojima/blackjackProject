@@ -1,7 +1,7 @@
 public class CardValue{
 
-  private String face;
-  private int numeric;
+  protected String face;
+  protected int numeric;
   
   public CardValue(String faceVal){
     face = faceVal;

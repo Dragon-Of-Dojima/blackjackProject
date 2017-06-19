@@ -151,6 +151,33 @@ public class Card{
     return value;
   }
   
+  public boolean isIn(ArrayList<Card> hand){
+    int acc = 0;
+    for (Card c : hand){
+      if (!equals(c)){
+        acc+=1;
+      }
+    }
+    if (acc == hand.size()-1){
+      return true;
+    }
+    else{
+      return false;
+    }
+      
+  }
+  
+  
+  public boolean equals(Card c){
+    if((this.value.getNumeric() == c.value.getNumeric()) 
+         && (this.suit == c.suit)){
+      return true;
+    }
+    else{
+      return false;
+    }    
+  }
+  
 
   
   public static void main(String[] args){
@@ -162,6 +189,19 @@ public class Card{
     System.out.println(e.toString());
     Card f = new Card();
     System.out.println(f.toString());
+    System.out.println(e.equals(d));
+    Card g = new Card();
+    g.value.face = "10";
+    g.value.numeric = 10;
+    g.suit = Suit.SPADES;
+    Card h = new Card();
+    h.value.face = "10";
+    h.value.numeric = 10;
+    h.suit = Suit.SPADES;
+    System.out.println(g.equals(h));
+    ArrayList<Card> hand = new ArrayList<Card>();
+    hand.add(g);
+    h.isIn(hand);
 
   }
   
