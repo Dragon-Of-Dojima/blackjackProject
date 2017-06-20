@@ -6,7 +6,7 @@ public class CardGame{
   //private ArrayList<Card> playerHand;
   
   //ArrayList<Card> hand = new ArrayList<Card>();
-
+  
   
   public static ArrayList<Card> dealIn(ArrayList<Card> hand){
     
@@ -16,24 +16,29 @@ public class CardGame{
     hand.add(a);
     
     while(hand.size() < 2){
-    if(!b.equals(a)){
-      hand.add(b);
-    }
-    else dealIn(hand);
+      if(!b.equiv(a)){
+        hand.add(b);
+      }
+      else dealIn(hand);
     }
     return hand;
-  }    
+  }
+  
+  public static ArrayList<Card> dealInDealer(ArrayList<Card> dealerhand){
+    ArrayList<Card> playerhand = new ArrayList<Card>();
+    ArrayList<Card> playerhandDelt = dealIn(playerhand);
     
-  
-  
-//  public static ArrayList<Card> dealInDealer(ArrayList<Card> hand){
-//    Card c = new Card();
-//    Card d = new Card();
-//    
-//    if
-//  }
-  
+    while(dealerhand.size() < 2){
+      Card a = new Card();
+      if((!a.isIn(playerhandDelt)) && (!a.isIn(dealerhand))){
+        dealerhand.add(a);
+      }
+    }return dealerhand;
     
+  } 
+  
+  
+  
   
   public static int calcScore(ArrayList<Card> hand){
     
@@ -45,9 +50,9 @@ public class CardGame{
         aces++;
       }
       else{
-       sum += c.getCardValue().getNumeric();
+        sum += c.getCardValue().getNumeric();
       }
-  }
+    }
     while (aces > 0){
       aces--;
       if(sum <= 10){
@@ -60,11 +65,12 @@ public class CardGame{
     return sum;
   }
   
-  public static void hit(ArrayList<Card> hand){
+  public static void hit(ArrayList<Card> hand,ArrayList<Card> hand2){
     Card c = new Card();
-    if (!c.isIn(hand)){
+    if ((!c.isIn(hand)) && (!c.isIn(hand2))){
       hand.add(c);
     }
+    else{hit(hand,hand2);}
   }
   
   
@@ -77,84 +83,101 @@ public class CardGame{
     }
   }
   
-//  public static void printDealerHand(ArrayList<Card> hand){
-//    for (int i = 1; i < hand.size(); i++){
-//      System.out.print(hand.get(i));
-//    }
-//  }
+  public static boolean noBusted(ArrayList<Card> player, ArrayList<Card> dealer){
+    if ((!isBusted(player)) && (!isBusted(dealer)))
+      return true;
+    else{
+      return false;
+    }
+  }
+  
   
   public static void main(String[] args){
-    Scanner in = new Scanner(System.in);
+    
     System.out.println("Welcome to Blackjack!\n");
     ArrayList<Card> playerhand = new ArrayList<Card>();
     ArrayList<Card> dealerhand = new ArrayList<Card>();
     dealIn(playerhand);
+    dealInDealer(dealerhand);
     
-    for (int i = 0; i < 2; i++){
-      Card a = new Card();
-      if(!a.isIn(dealerhand)){
-        dealerhand.add(a);
-      }
-    }
-    
-   
-    System.out.println("DEALER HAND: [hidden]" + " and " + dealerhand.get(1));
-    //System.out.println("TEST DEALER HAND: " + dealerhand);
+    //System.out.println("DEALER HAND: [hidden]" + " and " + dealerhand.get(1));
+    System.out.println("TEST DEALER HAND: " + dealerhand);
     System.out.println("Your hand: " + playerhand);
     
+    boolean playerStillIn = true;
+    Scanner in = new Scanner(System.in);
+//    System.out.println("Hit or stay? Press \"H\" for hit, \"S\" for stay");
+//    String choice = in.next();
     
-    while(!isBusted(playerhand)){
-      System.out.println("Your score is " + calcScore(playerhand) + ". Hit or stay?");
-      String hOrS = in.nextLine();
-      
-      
-      if (hOrS.equalsIgnoreCase("hit")){
-        
-        hit(playerhand);
-        System.out.println("YOUR HAND : " + playerhand);
-        
-        if(isBusted(playerhand)){
-          System.out.println("DEALER HAND: " + dealerhand);
-          System.out.println("Your score is " + calcScore(playerhand) + "! YOU LOSE");
-          break;
-        }
-        //System.out.println(playerhand);
-        
-      }
-      if (hOrS.equalsIgnoreCase("stay")){
-        
-        while(calcScore(dealerhand) <= 17){
-        Card n = new Card();
-        if(!n.isIn(dealerhand)){
-          dealerhand.add(n);
-        }
-      }
-        
-        
-      }
-      
-      
-      if(isBusted(dealerhand) || (!isBusted(playerhand) && (calcScore(playerhand) > calcScore(dealerhand)))){
-        System.out.println("DEALER HAND: " + dealerhand);
+    while((playerStillIn) && (!isBusted(playerhand))){
+      System.out.println("Hit or stay? Press \"H\" for hit, \"S\" for stay");
+      String choice = in.next();
+      if(choice.equalsIgnoreCase("h")){
+        hit(playerhand, dealerhand);
         System.out.println("YOUR HAND: " + playerhand);
-        System.out.println("YOU WIN");
-        break;
-      }
-      else if (isBusted(dealerhand) || (!isBusted(playerhand) && (calcScore(playerhand) < calcScore(dealerhand)))) {
-        System.out.println("DEALER HAND: " + dealerhand);
-        System.out.println("YOU LOSE");
-        break;
-      
+        System.out.println("YOUR SCORE: " + calcScore(playerhand));
       }
       else{
-        System.out.println("DEALER HAND: " + dealerhand);
-        System.out.println("PUSH");
-        break;
+        playerStillIn = false;
       }
     }
+    
+    if (isBusted(playerhand)){
+      System.out.println("BUSTED! YOU LOSE!!");
+      //System.out.println("YOUR HAND: " + playerhand + ". YOUR SCORE: " + calcScore(playerhand));
+    }
+    else{ 
+      while((calcScore(dealerhand) < 17) && (noBusted(playerhand,dealerhand))){
+        hit(dealerhand,playerhand);
+        //System.out.println("DEALER HAND: " + dealerhand);
+      }
+      
+      if(isBusted(dealerhand)){
+        System.out.println("DEALER HAND: " + dealerhand + " and SCORE: " + calcScore(dealerhand));
+        System.out.println("YOUR HAND: " + playerhand + " and SCORE: " + calcScore(playerhand) );
+        System.out.println("YOU WIN");
+      }
+      
+      else if ((calcScore(playerhand) < calcScore(dealerhand))) {
+        System.out.println("DEALER HAND: " + dealerhand + " and SCORE: " + calcScore(dealerhand));
+        System.out.println("YOUR HAND: " + playerhand + " and SCORE: " + calcScore(playerhand));
+        System.out.println("YOU LOSE");
+      }
+      
+      else if ((calcScore(playerhand) > calcScore(dealerhand))) {
+        System.out.println("DEALER HAND: " + dealerhand + " and SCORE: " + calcScore(dealerhand));
+        System.out.println("YOUR HAND: " + playerhand + " and SCORE: " + calcScore(playerhand));
+        System.out.println("YOU WIN");
+      }
+      
+      else if ((calcScore(playerhand) == calcScore(dealerhand))) {
+        System.out.println("DEALER HAND: " + dealerhand + " and SCORE: " + calcScore(dealerhand));
+        System.out.println("YOUR HAND: " + playerhand + " and SCORE: " + calcScore(playerhand));
+        System.out.println("PUSH");
+        
+      }
+    }
+    
+    
+    
+    
     
     
     
   }
-
+  
 }
+
+
+    
+    
+      
+      
+      
+    
+      
+      
+
+
+
+    
