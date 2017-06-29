@@ -1,0 +1,30 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JFrame; //used for testing
+
+public class HitOrStayButton extends JButton{
+
+static JButton stayButton = new JButton("STAY");
+static JButton hitButton = new JButton("HIT");
+  
+
+  public static void main(String[] args){
+
+    
+    
+  ActionListener pressChoice = new DecisionListener();
+  hitButton.addActionListener(pressChoice);
+  stayButton.addActionListener(pressChoice);
+  JPanel testPanel = new JPanel();
+  JFrame testFrame = new JFrame();
+  testPanel.add(stayButton);
+  testPanel.add(hitButton);
+  testFrame.add(testPanel);
+  testFrame.setSize(300, 150);
+  testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+  testFrame.setVisible(true);
+  }
+  
+}
