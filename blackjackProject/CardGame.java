@@ -98,6 +98,8 @@ public class CardGame{
     ArrayList<Card> playerhand = new ArrayList<Card>();
     ArrayList<Card> dealerhand = new ArrayList<Card>();
     dealIn(playerhand);
+    CardAdder OG1 = new CardAdder(playerhand.get(0));
+    CardAdder OG2 = new CardAdder(playerhand.get(1));
     dealInDealer(dealerhand);
     
     //System.out.println("DEALER HAND: [hidden]" + " and " + dealerhand.get(1));
@@ -108,13 +110,15 @@ public class CardGame{
     Scanner in = new Scanner(System.in);
 //    System.out.println("Hit or stay? Press \"H\" for hit, \"S\" for stay");
 //    String choice = in.next();
-    
+    int i = 2;
     while((playerStillIn) && (!isBusted(playerhand))){
       if(calcScore(playerhand) != 21){
       System.out.println("Hit or stay? Press \"H\" for hit, \"S\" for stay");
       String choice = in.next();
       if(choice.equalsIgnoreCase("h")){
         hit(playerhand, dealerhand);
+        CardAdder d = new CardAdder(playerhand.get(i));
+        i++;
         System.out.println("YOUR HAND: " + playerhand);
         System.out.println("YOUR SCORE: " + calcScore(playerhand));
       }

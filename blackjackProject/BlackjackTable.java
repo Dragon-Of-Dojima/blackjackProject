@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
-import java.net.URL;
+
 
 public class BlackjackTable extends JComponent{
   
@@ -30,14 +30,18 @@ public class BlackjackTable extends JComponent{
     JFrame frame = new JFrame(); // when this class is instantiated in another file, it will be JFrame frame = new BlackjackTable(); or something close
     JLabel panel = new JLabel(new ImageIcon("blackjackTableCanvas.jpg"));
     HitOrStayButton h = new HitOrStayButton();
+    
     frame.add(h);
     frame.setSize(WIDTH,HEIGHT);
     panel.setSize(WIDTH,HEIGHT);
-    frame.add(panel);  
+    frame.add(panel);
+    
     frame.setTitle("Test Canvas");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     BlackjackTable sampleTable = new BlackjackTable();
+    CardRender c = new CardRender();
     frame.add(sampleTable);
+    frame.add(c);
     frame.setVisible(true);
     
     

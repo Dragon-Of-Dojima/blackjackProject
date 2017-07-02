@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
+
 
 public class BlackjackTable extends JComponent{
   
@@ -26,7 +28,9 @@ public class BlackjackTable extends JComponent{
   
   public static void main(String[] args){
     JFrame frame = new JFrame(); // when this class is instantiated in another file, it will be JFrame frame = new BlackjackTable(); or something close
-    JLabel panel = new JLabel(new ImageIcon("C:\\Users\\Andrew T\\Documents\\javaplayaround\\Blackjack\\blackjackProject\\blackjackTableCanvas.jpg"));  
+    JLabel panel = new JLabel(new ImageIcon("blackjackTableCanvas.jpg"));
+    HitOrStayButton h = new HitOrStayButton();
+    frame.add(h);
     frame.setSize(WIDTH,HEIGHT);
     panel.setSize(WIDTH,HEIGHT);
     frame.add(panel);  

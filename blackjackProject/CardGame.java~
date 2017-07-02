@@ -110,6 +110,7 @@ public class CardGame{
 //    String choice = in.next();
     
     while((playerStillIn) && (!isBusted(playerhand))){
+      if(calcScore(playerhand) != 21){
       System.out.println("Hit or stay? Press \"H\" for hit, \"S\" for stay");
       String choice = in.next();
       if(choice.equalsIgnoreCase("h")){
@@ -120,6 +121,11 @@ public class CardGame{
       else{
         playerStillIn = false;
       }
+      }
+      else{
+        System.out.println("BLACKJACK 21!!! YOU WIN BIGLY");
+        break;
+      }
     }
     
     if (isBusted(playerhand)){
@@ -127,12 +133,12 @@ public class CardGame{
       //System.out.println("YOUR HAND: " + playerhand + ". YOUR SCORE: " + calcScore(playerhand));
     }
     else{ 
-      while((calcScore(dealerhand) < 17) && (noBusted(playerhand,dealerhand))){
+      while(((calcScore(dealerhand) < 17) && (noBusted(playerhand,dealerhand))) &&(calcScore(playerhand) != 21)) {
         hit(dealerhand,playerhand);
         //System.out.println("DEALER HAND: " + dealerhand);
       }
       
-      if(isBusted(dealerhand)){
+      if((isBusted(dealerhand)) && (calcScore(playerhand) != 21)){
         System.out.println("DEALER HAND: " + dealerhand + " and SCORE: " + calcScore(dealerhand));
         System.out.println("YOUR HAND: " + playerhand + " and SCORE: " + calcScore(playerhand) );
         System.out.println("YOU WIN");
@@ -144,7 +150,7 @@ public class CardGame{
         System.out.println("YOU LOSE");
       }
       
-      else if ((calcScore(playerhand) > calcScore(dealerhand))) {
+      else if ((calcScore(playerhand) > calcScore(dealerhand)) && (calcScore(playerhand) != 21) ) {
         System.out.println("DEALER HAND: " + dealerhand + " and SCORE: " + calcScore(dealerhand));
         System.out.println("YOUR HAND: " + playerhand + " and SCORE: " + calcScore(playerhand));
         System.out.println("YOU WIN");

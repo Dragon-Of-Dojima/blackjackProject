@@ -154,7 +154,7 @@ public class Card{
   public boolean isIn(ArrayList<Card> hand){
     int acc = 0;
     for (Card c : hand){
-      if (!equals(c)){
+      if (!equiv(c)){
         acc+=1;
       }
     }
@@ -168,8 +168,8 @@ public class Card{
   }
   
   
-  public boolean equals(Card c){
-    if((this.value.getNumeric() == c.value.getNumeric()) 
+  public boolean equiv(Card c){
+    if((this.value.numeric == c.value.numeric) 
          && (this.suit == c.suit)){
       return true;
     }
@@ -181,15 +181,16 @@ public class Card{
 
   
   public static void main(String[] args){
-    Card c = new Card();
-    System.out.println(c.toString());
-    Card d = new Card();
-    System.out.println(d.toString());
-    Card e = new Card();
-    System.out.println(e.toString());
-    Card f = new Card();
-    System.out.println(f.toString());
-    System.out.println(e.equals(d));
+//    Card c = new Card();
+//    System.out.println(c.toString());
+//    Card d = new Card();
+//    System.out.println(d.toString());
+//    Card e = new Card();
+//    System.out.println(e.toString());
+//    Card f = new Card();
+//    System.out.println(f.toString());
+//    System.out.println(e.equals(d));
+    
     Card g = new Card();
     g.value.face = "10";
     g.value.numeric = 10;
@@ -198,10 +199,10 @@ public class Card{
     h.value.face = "10";
     h.value.numeric = 10;
     h.suit = Suit.SPADES;
-    System.out.println(g.equals(h));
+    System.out.println(g.equiv(h));
     ArrayList<Card> hand = new ArrayList<Card>();
     hand.add(g);
-    h.isIn(hand);
+    System.out.println(h.isIn(hand));
 
   }
   
