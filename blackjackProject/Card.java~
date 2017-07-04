@@ -2,14 +2,15 @@ import java.util.*;
 
 public class Card{
 
-  private CardValue value;
-  private Suit suit;
+  protected CardValue value;
+  protected Suit suit;
   
   public Card(){
     this.value = new CardValue(determineFace());
     this.suit = determineSuit();
     
   }
+  
 
   public static Suit determineSuit(){
     

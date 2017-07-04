@@ -8,17 +8,18 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
-
+import java.awt.*;
 
 public class BlackjackTable extends JComponent{
   
   private static final int WIDTH = 1200;
   private static final int HEIGHT = 800;
-  private Rectangle table;
+  protected Rectangle table;
+//  protected HitOrStayButton h;
   
   public BlackjackTable(){
     table = new Rectangle(0,0,WIDTH,HEIGHT);
-  
+    
   }
   
   public void paintComponent(Graphics g){
@@ -28,16 +29,24 @@ public class BlackjackTable extends JComponent{
   
   public static void main(String[] args){
     JFrame frame = new JFrame(); // when this class is instantiated in another file, it will be JFrame frame = new BlackjackTable(); or something close
-    JLabel panel = new JLabel(new ImageIcon("blackjackTableCanvas.jpg"));
+    
+    JComponent label = new JLabel(new ImageIcon("blackjackTableCanvas.jpg"));
     HitOrStayButton h = new HitOrStayButton();
-    frame.add(h);
-    frame.setSize(WIDTH,HEIGHT);
-    panel.setSize(WIDTH,HEIGHT);
-    frame.add(panel);  
+    frame.setLayout(new BorderLayout());
+    frame.add(label, BorderLayout.CENTER);
+    frame.add(h, BorderLayout.SOUTH);
+    
+
+    frame.setSize(WIDTH+200,HEIGHT+200);
+    label.setSize(WIDTH+200,HEIGHT+200);
+    frame.add(label);
+    
     frame.setTitle("Test Canvas");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     BlackjackTable sampleTable = new BlackjackTable();
-    frame.add(sampleTable);
+//    CardRender c = new CardRender();
+//    frame.add(sampleTable);
+//    frame.add(c);
     frame.setVisible(true);
     
     

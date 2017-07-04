@@ -1,0 +1,15 @@
+import java.util.ArrayList;
+
+public class Hand{
+
+  protected ArrayList<Card> h;
+  
+  public Hand(){
+    h = new ArrayList<>();
+  }
+  
+  public void getCard(){
+    System.out.println(h);
+  } 
+
+}

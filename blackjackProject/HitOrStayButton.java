@@ -16,11 +16,11 @@ public HitOrStayButton(){
   JPanel testPanel = new JPanel();
   testPanel.add(hitButton);
   testPanel.add(stayButton);
-  JFrame testFrame = new JFrame();
-  testFrame.add(testPanel);
-  testFrame.setSize(300, 150);
-  testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-  testFrame.setVisible(true);
+//  JFrame testFrame = new JFrame();
+//  testFrame.add(testPanel);
+//  testFrame.setSize(300, 150);
+//  //testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//  testFrame.setVisible(true);
 }
 
 class DecisionListener implements ActionListener{

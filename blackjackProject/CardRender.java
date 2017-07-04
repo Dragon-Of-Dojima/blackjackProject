@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
-
+//tests for random card
 public class CardRender extends JComponent{
 
   private Card c;
@@ -23,7 +23,7 @@ public class CardRender extends JComponent{
     frame.setSize(400,400);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setVisible(true);
-    //System.out.println("" + c.value.face + " of " + c.suit);
+    System.out.println("" + c.value.face + " of " + c.suit);
   }
   
   

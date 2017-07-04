@@ -9,7 +9,7 @@ import javax.swing.ImageIcon;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 
-public class CardAdder{
+public class CardAdder extends JComponent{
 
   String val;
   String suit;
@@ -25,6 +25,12 @@ public class CardAdder{
     frame.setSize(400,400);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setVisible(true);
+    
+    /* for putting it in a panel instead
+     *ImageIcon i = new ImageIcon("card deck\\" + filename + ".png");
+    JPanel panel = new JPanel();
+    panel.add(new JLabel(i)); 
+     */
   }
   
     public String fetchCardFileLabel(){
