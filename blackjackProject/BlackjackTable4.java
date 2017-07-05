@@ -60,15 +60,19 @@ public class BlackjackTable4 extends JFrame{
     buttonPanel.add(stayButton,BorderLayout.EAST);
     buttonPanel.add(score, BorderLayout.PAGE_END);
     buttonPanel.setVisible(true);
-    
-
-    
-    
     this.add(buttonPanel, BorderLayout.SOUTH);
   } 
   
+  public void addCardToTable(CardRender2 c){
+    CardRender2 d = new CardRender2(new Card());
+    
+    background.add(c);
+    revalidate();
+  }
+  
   public static void main(String[] args){
     BlackjackTable4 f = new BlackjackTable4();
+    f.addCardToTable(new CardRender2(new Card()));
   }
   
 }

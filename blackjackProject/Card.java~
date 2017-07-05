@@ -143,7 +143,7 @@ public class Card{
 //    
 //    
 //  }
-  
+  @Override
   public String toString(){
     return "" + value.getFace() + " of " + suit ;
   }

@@ -1,29 +1,37 @@
 import java.util.ArrayList;
 
-public class Hand extends ArrayList{
+public class Hand  {
 
-  protected ArrayList<Card> h;
+  protected ArrayList<Card> cardlist;
   protected int handValue;
   
   public Hand(){
-    h = new ArrayList<Card>();
+    cardlist = new ArrayList<Card>();
     handValue = getScore();
   }
   
-  public void getHand(){
-    System.out.println(h);
+  public String getHand(){
+    return cardlist.toString();
+  }
+  
+  public int getSize(){
+    return cardlist.size();
   }
   
 
-  public void add(Card c){
-    h.add(c);
+  public void deal(Card c){
+    cardlist.add(c);
   }
   
   public int getScore(){
+    if (isEmpty()){
+      return 0;
+    }
+    else{
     int sum = 0;
     int aces = 0;
     
-    for (Card c : h){
+    for (Card c : cardlist){
       if (c.getCardValue().getFace().equals("A")){
         aces++;
       }
@@ -42,21 +50,31 @@ public class Hand extends ArrayList{
     }
     handValue = sum;
     return handValue;
+    }
+  }
+  
+  public boolean isEmpty(){
+    if (cardlist.size() == 0){
+      return true;
+    }
+    else{
+      return false;}
   }
   
   
   
   public static void main(String[] args){
     Hand e = new Hand();
-    e.add(new Card());
-    e.add(new Card());
-    e.add(new Card());
+    e.deal(new Card());
+    e.deal(new Card());
+    e.deal(new Card());
     e.getHand();
+    System.out.println(e.getSize());
     //System.out.println(e.getScore(e.h));
     System.out.println(e.getScore());
     Hand f = new Hand();
-    f.add(new Card());
-    f.add(new Card());
+    f.deal(new Card());
+    f.deal(new Card());
     f.getHand();
     System.out.println(f.getScore());
     

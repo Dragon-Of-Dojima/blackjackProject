@@ -24,15 +24,14 @@ public class BlackjackTable4 extends JFrame{
     
     public void actionPerformed(ActionEvent a){
       //code for hit/stay to go here
-      FlowLayout f = new FlowLayout();
+      //FlowLayout f = new FlowLayout();
       
       if(a.getSource() == hitButton){
         System.out.println("YOU CHOSE HIT!");
         CardRender2 c = new CardRender2(new Card());
         //FlowLayout f = new FlowLayout();
-        background.add(c, f);
-       
-        
+        background.add(c);
+
         revalidate();
       }
       else if(a.getSource() == stayButton){
@@ -46,21 +45,28 @@ public class BlackjackTable4 extends JFrame{
     
     this.setTitle("Blackjack");
     background = new TableComponent();
-    background.setLayout(new FlowLayout());
+    background.setLayout(new FlowLayout(0,0,50));
     this.add(background,BorderLayout.CENTER);
     this.setVisible(true);
-    this.setSize(1200,800);
+    this.setSize(1300,867);
+    
     JPanel buttonPanel = new JPanel();
+    JLabel score = new JLabel("Your score: ");
     ActionListener pressChoice = new DecisionListener();
     hitButton.addActionListener(pressChoice);
     stayButton.addActionListener(pressChoice);
-    
     buttonPanel.setSize(300,150);
     buttonPanel.add(hitButton,BorderLayout.WEST);
     buttonPanel.add(stayButton,BorderLayout.EAST);
+    buttonPanel.add(score, BorderLayout.PAGE_END);
     buttonPanel.setVisible(true);
     this.add(buttonPanel, BorderLayout.SOUTH);
   } 
+  
+//  public void addCardToTable(CardRender2 c){
+//    
+//    revalidate();
+//  }
   
   public static void main(String[] args){
     BlackjackTable4 f = new BlackjackTable4();

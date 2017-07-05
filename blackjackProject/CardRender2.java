@@ -28,18 +28,29 @@ public class CardRender2 extends JComponent{
   BufferedImage image;
   String val;
   String suit;
-  
+  String filename;
   
   public CardRender2(Card card) {
     this.val = card.value.face;
     this.suit = card.suit.toString();
-    String filename = this.fetchCardFileLabel();
+    filename = this.fetchCardFileLabel();
     try {
       image = ImageIO.read(new File("card deck\\" + filename + ".png"));
     } catch (IOException e) {
       e.printStackTrace();
     }
     
+  }
+  
+  public CardRender2(){
+    this.val = null;
+    this.suit = null;
+    filename = "DEALER_FIRST_CARD";
+    try {
+      image = ImageIO.read(new File("card deck\\" + filename + ".png"));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
   
   @Override
@@ -64,6 +75,24 @@ public class CardRender2 extends JComponent{
       first = val.substring(0,2);
     
     return "" + first + second;
+    
+  }
+  
+  public static void main(String[] args){
+    CardRender2 dealerfirst = new CardRender2();
+    JPanel j = new JPanel();
+    //j.setSize(dealerfirst.getPreferredSize());
+    j.add(dealerfirst);
+    JFrame jf = new JFrame();
+    jf.add(j);
+    jf.setSize(100,200);
+    jf.setVisible(true);
+    
+    j.setVisible(true);
+    CardRender2 k = new CardRender2(new Card());
+    JFrame j2 = new JFrame();
+    j2.add(k);
+    j2.setSize(k.getPreferredSize());
     
   }
   
