@@ -22,6 +22,8 @@ import java.awt.Window;
 import javax.swing.JWindow;
 import javax.swing.ImageIcon;
 import javax.imageio.ImageIO;
+import java.net.URL;
+import java.awt.image.*;
 
 public class CardRender2 extends JComponent{
   
@@ -34,20 +36,25 @@ public class CardRender2 extends JComponent{
     this.val = card.value.face;
     this.suit = card.suit.toString();
     filename = this.fetchCardFileLabel();
+    
+    URL cardview = getClass().getResource("card deck\\" + filename + ".png");
     try {
-      image = ImageIO.read(new File("card deck\\" + filename + ".png"));
+      
+      image = ImageIO.read(cardview);
     } catch (IOException e) {
       e.printStackTrace();
     }
     
   }
-  
   public CardRender2(){
     this.val = null;
     this.suit = null;
     filename = "DEALER_FIRST_CARD";
+    
+    URL cardview = getClass().getResource("card deck\\DEALER_FIRST_CARD.png");
     try {
-      image = ImageIO.read(new File("card deck\\" + filename + ".png"));
+      
+      image = ImageIO.read(cardview);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -85,7 +92,7 @@ public class CardRender2 extends JComponent{
     j.add(dealerfirst);
     JFrame jf = new JFrame();
     jf.add(j);
-    jf.setSize(100,200);
+    jf.setSize(dealerfirst.getPreferredSize());
     jf.setVisible(true);
     
     j.setVisible(true);
@@ -93,6 +100,7 @@ public class CardRender2 extends JComponent{
     JFrame j2 = new JFrame();
     j2.add(k);
     j2.setSize(k.getPreferredSize());
+    j2.setVisible(true);
     
   }
   

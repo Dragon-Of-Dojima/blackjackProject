@@ -20,15 +20,18 @@ import java.nio.file.Paths;
 import java.awt.Dimension;
 import java.awt.Window;
 import javax.swing.JWindow;
+import java.net.URL;
+import java.awt.image.*;
 
 public class TableComponent extends JLabel{
   
   BufferedImage table;
+  
 
   public TableComponent(){
-  
+    URL finalTable = getClass().getResource("blackjackTableCanvas.jpg");
         try {
-        table = ImageIO.read(new File("blackjackTableCanvas.jpg"));
+        table = ImageIO.read(finalTable);
     } catch (IOException e) {
         e.printStackTrace();
     }
@@ -50,7 +53,7 @@ public Dimension getPreferredSize() {
   public static void main(String[] args){
     JFrame f = new JFrame();
     f.add(new TableComponent());
-    f.setSize(1400,900);
+    f.setSize(1300,867);
     f.setVisible(true);
     f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
