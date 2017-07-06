@@ -11,7 +11,7 @@ public class CardGame2{
     h.deal(a);
     
     while(h.getSize() < 2){
-      if(!b.isIn(h)){
+      if(!b.equiv(a)){
         h.deal(b);
         
       }
