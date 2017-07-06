@@ -168,6 +168,22 @@ public class Card{
       
   }
   
+    public boolean isIn(Hand sampleHand){
+    int acc = 0;
+    for (Card c : sampleHand.cardlist){
+      if (!equiv(c)){
+        acc+=1;
+      }
+    }
+    if (acc == sampleHand.getSize()-1){
+      return true;
+    }
+    else{
+      return false;
+    }
+      
+  }
+  
   
   public boolean equiv(Card c){
     if((this.value.numeric == c.value.numeric) 
@@ -204,6 +220,20 @@ public class Card{
     ArrayList<Card> hand = new ArrayList<Card>();
     hand.add(g);
     System.out.println(h.isIn(hand));
+    
+    Card alpha = new Card();
+    alpha.value.face = "J";
+    alpha.value.numeric = 10;
+    alpha.suit = Suit.CLUBS;
+    Card beta = new Card();
+    beta.value.face = "J";
+    beta.value.numeric = 10;
+    beta.suit = Suit.CLUBS;
+    System.out.println();
+    System.out.println(alpha.equiv(beta));
+    Hand hand1 = new Hand();
+    hand1.deal(alpha);
+    System.out.println(alpha.isIn(hand1));
 
   }
   

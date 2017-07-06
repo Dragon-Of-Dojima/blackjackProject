@@ -15,7 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.FlowLayout;
 import java.util.Scanner;
 
-public class BlackjackGameTable2 extends JFrame{
+public class BlackjackGameTableV1 extends JFrame{
   
   JButton stayButton = new JButton("STAY");
   JButton hitButton = new JButton("HIT");
@@ -29,11 +29,34 @@ public class BlackjackGameTable2 extends JFrame{
 
   
   
+  class DecisionListener implements ActionListener{
+    
+    public void actionPerformed(ActionEvent a){
+      if(a.getSource() == hitButton){
+        
+        CardGame2.hit(playerhand, dealerhand);        
+        playerAddCardToTable(new CardRender2(playerhand.cardlist.get(playerhand.getSize()-1)));
+       
+       score.setText("Your score: " + playerhand.getScore());
+       System.out.println("YOU CHOSE HIT! Your Score: " + playerhand.getScore());
+        //revalidate();
+       // 
+      }
+      else if(a.getSource() == stayButton){
+        System.out.println("YOU CHOSE STAY!");
+      }
+      else if (a.getSource() == resetButton){
+        
 
+        
+      }
+      
+    }
+  }
   
 
   
-  public BlackjackGameTable2(){
+  public BlackjackGameTableV1(){
     
     this.setTitle("Blackjack");
     background = new TableComponent();
@@ -100,35 +123,10 @@ public class BlackjackGameTable2 extends JFrame{
     dealerOGCard.setBounds(0, 500, dealerOGCard.image.getWidth(), dealerOGCard.image.getHeight());
   }
   
-    class DecisionListener implements ActionListener{
-    
-    public void actionPerformed(ActionEvent a){
-      if(a.getSource() == hitButton){
-        
-        CardGame2.hit(playerhand, dealerhand);        
-        playerAddCardToTable(new CardRender2(playerhand.cardlist.get(playerhand.getSize()-1)));
-       
-       score.setText("Your score: " + playerhand.getScore());
-       System.out.println("YOU CHOSE HIT! Your Score: " + playerhand.getScore());
-        //revalidate();
-       // 
-      }
-      else if(a.getSource() == stayButton){
-        System.out.println("YOU CHOSE STAY!");
-      }
-      else if (a.getSource() == resetButton){
-        
-
-        
-      }
-      
-    }
-  }
-  
   public static void main(String[] args){
         
     System.out.println("Welcome to Blackjack!\n");
-    BlackjackGameTable2 g = new BlackjackGameTable2();
+    BlackjackGameTableV1 g = new BlackjackGameTableV1();
     System.out.println("Dealer hand: " + g.dealerhand.cardlist + " " + g.dealerhand.getScore());
     System.out.println("Your hand: " + g.playerhand.cardlist + " " + g.playerhand.getScore());
     
@@ -212,4 +210,5 @@ public class BlackjackGameTable2 extends JFrame{
     }
   }
 }
+  
   

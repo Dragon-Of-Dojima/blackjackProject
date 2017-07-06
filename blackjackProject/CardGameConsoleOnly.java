@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class CardGame{
+public class CardGameConsoleOnly{
   
   //private ArrayList<Card> playerHand;
   
@@ -98,8 +98,7 @@ public class CardGame{
     ArrayList<Card> playerhand = new ArrayList<Card>();
     ArrayList<Card> dealerhand = new ArrayList<Card>();
     dealIn(playerhand);
-    CardAdder OG1 = new CardAdder(playerhand.get(0));
-    CardAdder OG2 = new CardAdder(playerhand.get(1));
+
     dealInDealer(dealerhand);
     
     //System.out.println("DEALER HAND: [hidden]" + " and " + dealerhand.get(1));
@@ -117,7 +116,7 @@ public class CardGame{
       String choice = in.next();
       if(choice.equalsIgnoreCase("h")){
         hit(playerhand, dealerhand);
-        CardAdder d = new CardAdder(playerhand.get(i));
+        
         i++;
         System.out.println("YOUR HAND: " + playerhand);
         System.out.println("YOUR SCORE: " + calcScore(playerhand));
