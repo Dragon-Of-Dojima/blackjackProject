@@ -1,6 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-
+//an Object Oriented console game
 public class CardGame2{
   
   BlackjackTable4 b = new BlackjackTable4();
