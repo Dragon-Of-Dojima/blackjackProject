@@ -53,8 +53,7 @@ public class BlackjackGameTable2 extends JFrame{
     this.add(buttonPanel, BorderLayout.SOUTH);
     
     CardGame2.dealIn(playerhand);
-    CardGame2.hit(dealerhand,playerhand);
-    CardGame2.hit(dealerhand,playerhand);
+    CardGame2.dealInDealer(dealerhand);
     CardRender2 playerFirstCard = new CardRender2(playerhand.cardlist.get(0));
     CardRender2 playerSecondCard = new CardRender2(playerhand.cardlist.get(1));
     background.add(playerFirstCard);

@@ -20,15 +20,18 @@ public class CardGame2{
     return h;
   }
   
-//  public static Hand dealInDealer(Hand dealerhand){
-//    Hand playerhand = new Hand();
-//    hit(dealerhand,playerhand);
-//    hit(dealerhand,playerhand);
-//    return dealerhand;
-//    
-//  } 
-
-  
+  public static Hand dealInDealer(Hand dealerhand){
+    Hand playerhand = new Hand();
+    Hand playerhandDelt = dealIn(playerhand);
+    
+    while(dealerhand.getSize() < 2){ //unless Hand extends ArrayList, does not compile
+      Card a = new Card();
+      if((!a.isIn(playerhandDelt)) && (!a.isIn(dealerhand))){
+        dealerhand.deal(a);
+      }
+    }return dealerhand;
+    
+  } 
   
   
   
@@ -67,8 +70,7 @@ public class CardGame2{
     Hand playerhand = new Hand();
     Hand dealerhand = new Hand();
     dealIn(playerhand);
-    hit(dealerhand,playerhand);
-    hit(dealerhand,playerhand);
+    dealInDealer(dealerhand);
     
 
     System.out.println("Dealer hand: " + dealerhand.cardlist);
