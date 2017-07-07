@@ -37,7 +37,7 @@ public class CardRender2 extends JComponent{
     this.suit = card.suit.toString();
     filename = this.fetchCardFileLabel();
     
-    URL cardview = getClass().getResource("\\card deck\\" + filename + ".png");
+    URL cardview = getClass().getResource("card deck/" + filename + ".png");
     try {
       
       image = ImageIO.read(cardview);
@@ -51,7 +51,7 @@ public class CardRender2 extends JComponent{
     this.suit = null;
     filename = "DEALER_FIRST_CARD";
     
-    URL cardview = getClass().getResource("\\card deck\\DEALER_FIRST_CARD.png");
+    URL cardview = getClass().getResource("card deck/DEALER_FIRST_CARD.png");
     try {
       
       image = ImageIO.read(cardview);
