@@ -2,20 +2,19 @@ import java.util.*;
 
 public class Card{
 
-  protected CardValue value; //holds a Card's CardValue so it can store face and numeric
-  protected Suit suit; //holds a Card's suit
+  protected CardValue value;
+  protected Suit suit;
   
   public Card(){
-    this.value = new CardValue(determineFace());  //assigns the output of a randomly chosen card to Card's this.value
-                                                  //by plugging a call to determineFace() into a CardValue
-    this.suit = determineSuit(); //this.suit is assigned a suit at random
-                  
+    this.value = new CardValue(determineFace());
+    this.suit = determineSuit();
+    
   }
   
 
   public static Suit determineSuit(){
     
-    int randNum = (int) (Math.random() * 4); //generates a random value [0,4) as ints, so there can only be 0, 1, 2, 3
+    int randNum = (int) (Math.random() * 4);
     
     if (randNum == 0){
       return Suit.CLUBS;
@@ -48,7 +47,7 @@ public class Card{
 //
 //}
   
-  public static String determineFace(){ //determines a face at random so that CardValue in this.value's init has a parameter
+  public static String determineFace(){
     String f = null;
     
     int rand = (int)(Math.random()*13);
@@ -144,18 +143,15 @@ public class Card{
 //    
 //    
 //  }
-  
-  //returns a String representation of the Card
   @Override
   public String toString(){
     return "" + value.getFace() + " of " + suit ;
   }
-  //returns CardValue for a given Card
+  
   public CardValue getCardValue(){
     return value;
   }
   
-  ///an old method I used before actually making Hand objects
 //  public boolean isIn(ArrayList<Card> hand){
 //    int acc = 0;
 //    for (Card c : hand){
@@ -172,7 +168,6 @@ public class Card{
 //      
 //  }
   
-  //a method to check if a card was in another hand; goes thru a Hand's cardlist instance variable
   public boolean isIn(Hand sampleHand){
     int acc = 0;
     for (Card c : sampleHand.cardlist){
@@ -180,32 +175,29 @@ public class Card{
         acc+=1;
       }
     }
-    return (acc == sampleHand.getSize()-1);//{
- //     return true;
+    if (acc == sampleHand.getSize()-1){
+      return true;
     }
-//    else{
-//      return false;
-//    }
+    else{
+      return false;
+    }
     
- // }
+  }
   
-  //to see if two cards are equivalent in determinant parameters
+  
   public boolean equiv(Card c){
-    return((this.value.numeric == c.value.numeric) 
-         && (this.suit.equals(c.suit)));
-//{
-//      return true;
-//    }
-//    else{
-//      return false;
-//    }    
+    if((this.value.numeric == c.value.numeric) 
+         && (this.suit.equals(c.suit))){
+      return true;
+    }
+    else{
+      return false;
+    }    
   }
   
 
   
   public static void main(String[] args){
-    
-    ///these unit tests were used before making a Hand object
 //    Card c = new Card();
 //    System.out.println(c.toString());
 //    Card d = new Card();
@@ -229,7 +221,6 @@ public class Card{
 //    hand.add(g);
 //    System.out.println(h.isIn(hand));
     
-    //tests to see if methods worked as expected
     Card alpha = new Card();
     alpha.value.face = "J";
     alpha.value.numeric = 10;

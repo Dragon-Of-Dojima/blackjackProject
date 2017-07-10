@@ -23,12 +23,11 @@ import javax.swing.JWindow;
 import java.net.URL;
 import java.awt.image.*;
 
-//this class pulls the background photo for the Blackjack table
 public class TableComponent extends JLabel{
   
   BufferedImage table;
   
-  //constructor reads in image file as a URL for purposes of making a .jar file, and throws exception if file not there
+
   public TableComponent(){
     URL finalTable = getClass().getResource("blackjackTableCanvas.jpg");
         try {
@@ -38,20 +37,19 @@ public class TableComponent extends JLabel{
     }
   
   }
- //paints the game table image
+  
   @Override
 protected void paintComponent(Graphics g) {
   Graphics2D g2 = (Graphics2D) g;
     super.paintComponent(g2);
     g2.drawImage(table, 0, 0, null);
 }
-  //returns Dimension object for the table
+  
   @Override
 public Dimension getPreferredSize() {
     return new Dimension(table.getWidth(), table.getHeight());
 }
   
-  //test to see if table shows up
   public static void main(String[] args){
     JFrame f = new JFrame();
     f.add(new TableComponent());

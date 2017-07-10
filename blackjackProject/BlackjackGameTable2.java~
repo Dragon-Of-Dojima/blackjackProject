@@ -15,25 +15,19 @@ import java.awt.event.ActionListener;
 
 public class BlackjackGameTable2 extends JFrame{
   
-  ///assign and instantiate game buttons
   JButton stayButton = new JButton("STAY");
   JButton hitButton = new JButton("HIT");
   JButton resetButton = new JButton("Reset");
-  //declare the background on which to place TableComponent
   JLabel background;
-  //instantiate Hand objects for player and dealer
   Hand playerhand = new Hand();
   Hand dealerhand = new Hand();
-  //declare score and test as JLabels
   JLabel score;
   JLabel text;
-  //initialize boolean values for whether the game is over, and thus dealer score is hidden
   Boolean gameOver = false;
   Boolean isDealerScoreHidden = true;
   
-  //constructs an instance of a full game
   public BlackjackGameTable2(){
-    //set title, size, visibility, and instantiate a TableComponent()
+    
     this.setTitle("Blackjack");
     background = new TableComponent();
     background.setLayout(null);
@@ -41,15 +35,9 @@ public class BlackjackGameTable2 extends JFrame{
     this.setVisible(true);
     this.setSize(1300,867);
     
-    //instantiate a Jpanel for buttons
     JPanel buttonPanel = new JPanel();
-    
-    //set text on the JFrame and for debug purposes the console
     score = new JLabel("Your score: " + playerhand.getScore() + ", dealer score: hidden" );
     text = new JLabel("WELCOME TO BLACKJACK!");
-    
-    //Instantiate a DecisionListener, add it to the buttons, and place 
-    //buttons on the buttonPanel
     ActionListener pressChoice = new DecisionListener();
     hitButton.addActionListener(pressChoice);
     stayButton.addActionListener(pressChoice);
@@ -60,21 +48,20 @@ public class BlackjackGameTable2 extends JFrame{
     buttonPanel.add(stayButton,BorderLayout.EAST);
     buttonPanel.add(score, BorderLayout.PAGE_END);
     buttonPanel.add(resetButton, BorderLayout.EAST);
+    
     buttonPanel.setVisible(true);
     this.add(buttonPanel, BorderLayout.SOUTH);
     
-    //add Cards to both player and dealer hands
     CardGame2.dealIn(playerhand);
     CardGame2.hit(dealerhand,playerhand);
     CardGame2.hit(dealerhand,playerhand);
-    
-    //physically place the player and dealers first two cards each on the screen
     CardRender2 playerFirstCard = new CardRender2(playerhand.cardlist.get(0));
     CardRender2 playerSecondCard = new CardRender2(playerhand.cardlist.get(1));
     background.add(playerFirstCard);
     playerFirstCard.setBounds(0,110, playerFirstCard.image.getWidth(), playerFirstCard.image.getHeight());
     background.add(playerSecondCard);
     playerSecondCard.setBounds(120, 110, playerSecondCard.image.getWidth(), playerSecondCard.image.getHeight());
+    
     CardRender2 dealerFirstCard = new CardRender2();
     CardRender2 dealerSecondCard = new CardRender2(dealerhand.cardlist.get(1));
     background.add(dealerFirstCard);
@@ -98,20 +85,19 @@ public class BlackjackGameTable2 extends JFrame{
     //
   } 
   
-  //adds a physical representation of a card to the player's physically displayed hand
   public void playerAddCardToTable(CardRender2 c){
 
     background.add(c);
     c.setBounds((playerhand.getSize() - 1) * c.image.getWidth(), 110, c.image.getWidth(), c.image.getHeight());
     revalidate();
   }
-  //adds a physical rep of a card to the dealers physically displayed hand
+  
   public void dealerAddCardToTable(CardRender2 d){
     background.add(d);
     d.setBounds((dealerhand.getSize() -1) * d.image.getWidth(), 550, d.image.getWidth(), d.image.getHeight());
     revalidate();
   }
-  //reveals the dealer's first card, done when a game is over
+  
   public void dealerReveal(){
     isDealerScoreHidden = false;
     CardRender2 dealerOGCard = new CardRender2(dealerhand.cardlist.get(0));
@@ -120,7 +106,6 @@ public class BlackjackGameTable2 extends JFrame{
     gameOver = true;
   }
   
-  //used to make the dealer hit until he's at 17 or higher after player has stayed
   public void dealerStandOnSeventeen(){
     while(((dealerhand.getScore() < 17) && (CardGame2.noBusted(playerhand,dealerhand))) &&(playerhand.getScore() != 21)) {
       CardGame2.hit(dealerhand,playerhand);
@@ -128,7 +113,7 @@ public class BlackjackGameTable2 extends JFrame{
     }
   }
   
-  //used for when stay is pressed, checks scores to see who wins
+  
   public void winLossConditions(){
     
     if ((playerhand.getScore() == dealerhand.getScore())) {
@@ -167,9 +152,7 @@ public class BlackjackGameTable2 extends JFrame{
     gameOver = true;
   }
   
-  //checks to see if the player has a score of 21, at which the game ends
   public void playerTwentyOne(){
-    //for non-push condition
     if ((playerhand.getScore() == 21) &&(dealerhand.getScore() !=21)){
       System.out.println("BLACKJACK 21!!! YOU WIN BIGLY");
       text.setText("BLACKJACK 21!!! YOU WIN BIGLY");
@@ -177,7 +160,6 @@ public class BlackjackGameTable2 extends JFrame{
       gameOver = true;
       isDealerScoreHidden = false;
     }
-    //for push condition aka a tie
     else if ((playerhand.getScore() == 21) && (dealerhand.getScore() == 21)){
       System.out.println("PUSH");
       text.setText("PUSH");
@@ -187,7 +169,7 @@ public class BlackjackGameTable2 extends JFrame{
     }
     score.setText("Your score: " + playerhand.getScore() + ", dealer score: " + dealerhand.getScore());
   }
-    //similar to playerTwentyOne but for the dealer
+  
     public void dealerTwentyOne(){
     if ((dealerhand.getScore() == 21) &&(playerhand.getScore() !=21)){
       System.out.println("YOU LOSE!");
@@ -206,11 +188,10 @@ public class BlackjackGameTable2 extends JFrame{
     score.setText("Your score: " + playerhand.getScore() + ", dealer score: " + dealerhand.getScore());
   }
   
-    //an inner class which implemements interface ActionListener so that buttons can be pressed
     class DecisionListener implements ActionListener{
     
       public void actionPerformed(ActionEvent a){
-        //actions for the hit button
+        
         if(a.getSource() == hitButton){
           if(!gameOver){
             System.out.println("YOU CHOSE HIT! Your Score: " + playerhand.getScore());
@@ -244,7 +225,7 @@ public class BlackjackGameTable2 extends JFrame{
             playerTwentyOne();
           }
         }
-        //actions for the stay button
+        
         else if(a.getSource() == stayButton){
           if(!gameOver){
             System.out.println("YOU CHOSE STAY!");
@@ -252,11 +233,11 @@ public class BlackjackGameTable2 extends JFrame{
             winLossConditions();
           }
         }
-        //actions for the reset button
+        
         else if (a.getSource() == resetButton){
           System.out.println("RESETTING...");
-          dispose(); //disposes the current running
-          main(null); //instantiates a new instance of the game and calls the main; 
+          dispose();
+          main(null);
           System.out.println("RESET!");
           
         }
@@ -268,7 +249,6 @@ public class BlackjackGameTable2 extends JFrame{
         }
       }
     }
-    //an instance of a game
   public static void main(String[] args){
         BlackjackGameTable2 g = new BlackjackGameTable2();
     }

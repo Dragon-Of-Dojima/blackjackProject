@@ -1,12 +1,8 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 //an Object Oriented console game
-
-//hold static method to deal in players
 public class CardGame2{
   
-  //dealers in players by handing them unique cards,
-  //returns the hand
   public static Hand dealIn(Hand h){
     
     Card a = new Card();
@@ -37,7 +33,7 @@ public class CardGame2{
   
   
   
-  //adds a card to a players hand after checking to ensure its not already in another hand
+  
   public static void hit(Hand a, Hand b){
     Card c = new Card();
     if ((!c.isIn(a)) && (!c.isIn(b))){
@@ -47,18 +43,24 @@ public class CardGame2{
   }
   
   
-  //returns true if a player is busted
+  
   public static boolean isBusted(Hand h){
-    return(h.getScore() > 21);
-      
+    if(h.getScore() > 21)
+      return true;
+    else{
+      return false;
+    }
   }
   
-  // checks to see if anyone is busted
   public static boolean noBusted(Hand player, Hand dealer){
-    return((!isBusted(player)) && (!isBusted(dealer)));
+    if ((!isBusted(player)) && (!isBusted(dealer)))
+      return true;
+    else{
+      return false;
+    }
   }
   
-  //runs a console version of blackjack
+  
   public static void main(String[] args){
     
     System.out.println("Welcome to Blackjack!\n");

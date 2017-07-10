@@ -2,30 +2,27 @@ import java.util.ArrayList;
 
 public class Hand  {
 
-  protected ArrayList<Card> cardlist; //where cards are stored
-  protected int handValue; //the score a hand yields
+  protected ArrayList<Card> cardlist;
+  protected int handValue;
   
   public Hand(){
-    cardlist = new ArrayList<Card>(); //instantiates a new ArrayList of type Card
-    handValue = getScore(); //assigns handValue by calling getScore()
+    cardlist = new ArrayList<Card>();
+    handValue = getScore();
   }
   
-  //returns a string representation of a hand
   public String getHand(){
     return cardlist.toString();
   }
   
-  //gets how many cards are in the hand
   public int getSize(){
     return cardlist.size();
   }
   
-  //adds a card to the hand
+
   public void deal(Card c){
     cardlist.add(c);
   }
   
-  //calculates the score a hand yields
   public int getScore(){
     if (isEmpty()){
       return 0;
@@ -56,14 +53,16 @@ public class Hand  {
     }
   }
   
-  //returns true if a hand is empty
   public boolean isEmpty(){
-    return (cardlist.size() == 0);
-      
+    if (cardlist.size() == 0){
+      return true;
+    }
+    else{
+      return false;}
   }
   
   
-  //tests on the Hand object and its methods
+  
   public static void main(String[] args){
     Hand e = new Hand();
     e.deal(new Card());
